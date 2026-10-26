@@ -1,1 +1,5 @@
-Modify this file with a description of your mod.
+Turns a multiplayer server into a survival multiplayer (SMP) world for a group of friends.
+
+Built as a small core plus switchable modules. The first module, Gating, keeps bosses locked until enough of the group is online, so nobody gets far ahead of everyone else.
+
+Server-side rules. Single-player is not affected.

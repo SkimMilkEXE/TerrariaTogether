@@ -1,3 +1,39 @@
 # This file will automatically update with entries for new content after a build and reload.
 # Please read https://github.com/tModLoader/tModLoader/wiki/Localization to learn more about localization and these files.
 
+Configs: {
+	CoreServerConfig: {
+		DisplayName: Server Settings
+
+		Admins: {
+			Label: Admins
+			Tooltip: Player names that can run admin commands and change these settings in game. Names must match exactly.
+		}
+	}
+}
+
+Commands: {
+	Description: Terraria Together commands. Use /smp help.
+	Help:
+		'''
+		/smp help - show this list
+		/smp modules - list modules and whether they're on
+		/smp whoami - show your name and admin status
+		/smp <module> ... - run a module's commands
+		'''
+	Unknown: Unknown command "{0}". Use /smp help.
+	NotAdmin: Only server admins can do that.
+	NoModules: No modules are installed yet.
+	ModulesHeader: Modules:
+	ModuleLine: "  {0}: {1}"
+	On: on
+	Off: off
+	ModuleDisabled: The {0} module is turned off.
+	NoModuleCommands: The {0} module has no commands.
+
+	WhoAmI: {
+		Console: You are the server console, which is always an admin.
+		Admin: "{0}: admin"
+		Player: "{0}: not an admin"
+	}
+}
