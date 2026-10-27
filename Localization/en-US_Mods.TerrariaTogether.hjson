@@ -7,8 +7,32 @@ Configs: {
 
 		Admins: {
 			Label: Admins
-			Tooltip: Player names that can run admin commands and change these settings in game. Names must match exactly.
+			Tooltip: Player names or player IDs that can run admin commands and change these settings in game. Names must match exactly. Players can see their ID with /smp whoami.
 		}
+
+		RosterMode: {
+			Label: Roster mode
+			Tooltip: Auto adds anyone who joins as a member. Manual only adds players an admin adds with /smp roster add.
+		}
+
+		InactiveDays: {
+			Label: Inactive after (days)
+			Tooltip: Members not seen for this many days stop counting toward the member total. 0 means never.
+		}
+	}
+
+	RosterMode: {
+		Auto: {
+			Label: Auto
+			Tooltip: ""
+		}
+
+		Manual: {
+			Label: Manual
+			Tooltip: ""
+		}
+
+		Tooltip: ""
 	}
 }
 
@@ -18,7 +42,9 @@ Commands: {
 		'''
 		/smp help - show this list
 		/smp modules - list modules and whether they're on
-		/smp whoami - show your name and admin status
+		/smp whoami - show your name, ID and admin status
+		/smp roster - list members and who's online
+		/smp roster add|remove|exclude <name> - manage members (admins)
 		/smp <module> ... - run a module's commands
 		'''
 	Unknown: Unknown command "{0}". Use /smp help.
@@ -33,7 +59,27 @@ Commands: {
 
 	WhoAmI: {
 		Console: You are the server console, which is always an admin.
-		Admin: "{0}: admin"
-		Player: "{0}: not an admin"
+		Admin: "{0} (ID {1}): admin"
+		Player: "{0} (ID {1}): not an admin"
+		UnknownUuid: not received yet
+	}
+
+	Roster: {
+		Usage: Usage: /smp roster [list | add <name> | remove <name> | exclude <name>]
+		Empty: No members yet.
+		Header: "{0} of {1} members online:"
+		LineOnline: "  {0}: online"
+		LineOffline: "  {0}: last seen {1} days ago"
+		LineInactive: "  {0}: inactive, last seen {1} days ago"
+		LineExcluded: "  {0}: excluded"
+		Added: "{0} is now a member."
+		Removed: "{0} was removed from the roster. In Auto mode they'll be added again next time they join, use exclude to keep them out of the counts."
+		Excluded: "{0} is now excluded and won't count toward online or total. Run exclude again to undo."
+		Included: "{0} counts toward online and total again."
+		AlreadyMember: "{0} is already a member."
+		NotOnline: No online player is named "{0}". Players have to be online to be added.
+		NoUuid: "{0} hasn't finished joining yet, try again in a moment."
+		NotFound: No member is named "{0}".
+		Ambiguous: More than one member is named "{0}". Ask one of them to rename and rejoin.
 	}
 }

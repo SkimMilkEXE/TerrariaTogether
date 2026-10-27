@@ -1,9 +1,11 @@
+using System;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using TerrariaTogether.Core.Config;
+using TerrariaTogether.Core.Roster;
 
 namespace TerrariaTogether.Core.Permissions
 {
@@ -26,10 +28,16 @@ namespace TerrariaTogether.Core.Permissions
 			if (Main.netMode == NetmodeID.SinglePlayer)
 				return true;
 
-			// ponytail: names only, phase 2 adds client uuids once the server captures them
+			string uuid = PresenceTracker.Instance.GetUuid(player);
 			foreach (string entry in ModContent.GetInstance<CoreServerConfig>().Admins)
 			{
-				if (entry?.Trim() == player.name)
+				string trimmed = entry?.Trim();
+				if (string.IsNullOrEmpty(trimmed))
+					continue;
+				if (trimmed == player.name)
+					return true;
+				// accepts the full uuid or the short id from /smp whoami
+				if (uuid != null && trimmed.Length >= PresenceTracker.ShortIdLength && uuid.StartsWith(trimmed, StringComparison.OrdinalIgnoreCase))
 					return true;
 			}
 			return false;

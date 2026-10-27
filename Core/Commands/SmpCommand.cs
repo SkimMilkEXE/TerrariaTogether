@@ -4,6 +4,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using TerrariaTogether.Core.Modules;
 using TerrariaTogether.Core.Permissions;
+using TerrariaTogether.Core.Roster;
 
 namespace TerrariaTogether.Core.Commands
 {
@@ -31,6 +32,9 @@ namespace TerrariaTogether.Core.Commands
 					return;
 				case "whoami":
 					WhoAmI(caller);
+					return;
+				case "roster":
+					RosterCommands.Handle(caller, args[1..]);
 					return;
 			}
 
@@ -75,8 +79,11 @@ namespace TerrariaTogether.Core.Commands
 				return;
 			}
 
+			// only shown to the caller, uuids are never listed for other players
+			string uuid = PresenceTracker.Instance.GetUuid(caller.Player);
+			string id = uuid != null ? PresenceTracker.ShortId(uuid) : Language.GetTextValue(Key + "WhoAmI.UnknownUuid");
 			string key = SmpPermissions.IsAdmin(caller) ? "WhoAmI.Admin" : "WhoAmI.Player";
-			caller.Reply(Language.GetTextValue(Key + key, caller.Player.name));
+			caller.Reply(Language.GetTextValue(Key + key, caller.Player.name, id));
 		}
 	}
 }

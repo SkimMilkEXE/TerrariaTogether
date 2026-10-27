@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader.Config;
 using TerrariaTogether.Core.Permissions;
+using TerrariaTogether.Core.Roster;
 
 namespace TerrariaTogether.Core.Config
 {
@@ -12,8 +14,16 @@ namespace TerrariaTogether.Core.Config
 
 		// module on/off toggles go here as each module is added
 
-		// player names, uuids come in phase 2
+		// player names or client uuids, players can see theirs with /smp whoami
 		public List<string> Admins = new();
+
+		[DefaultValue(RosterMode.Auto)]
+		public RosterMode RosterMode = RosterMode.Auto;
+
+		// 0 means members never go inactive
+		[Range(0, 365)]
+		[DefaultValue(14)]
+		public int InactiveDays = 14;
 
 		// only admins can change server settings from in game
 		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message)
