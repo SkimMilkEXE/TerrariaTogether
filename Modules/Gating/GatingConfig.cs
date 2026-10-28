@@ -13,6 +13,14 @@ namespace TerrariaTogether.Modules.Gating
 		Ignore
 	}
 
+	public enum MidFightPolicy
+	{
+		// a fight that started unlocked always finishes
+		Continue,
+		// warn, then send the boss away if still locked when time runs out
+		DespawnAfterWarning
+	}
+
 	public class GatingConfig : SmpServerConfig
 	{
 		// percent of counted members that must be online
@@ -36,6 +44,14 @@ namespace TerrariaTogether.Modules.Gating
 		// modded npcs flagged as bosses that nothing registered (no boss checklist entry, no Mod.Call)
 		[DefaultValue(UnknownBossPolicy.Gate)]
 		public UnknownBossPolicy UnknownBosses = UnknownBossPolicy.Gate;
+
+		// what happens when a boss becomes locked during its fight (someone left)
+		[DefaultValue(MidFightPolicy.Continue)]
+		public MidFightPolicy MidFight = MidFightPolicy.Continue;
+
+		[Range(5, 300)]
+		[DefaultValue(30)]
+		public int MidFightWarningSeconds = 30;
 
 		// boss key -> gated, only bosses switched at least once are stored, missing keys count as gated
 		[Header("Bosses")]

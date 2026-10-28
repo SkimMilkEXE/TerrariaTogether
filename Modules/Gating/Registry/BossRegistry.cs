@@ -11,6 +11,8 @@ namespace TerrariaTogether.Modules.Gating.Registry
 		private readonly Dictionary<string, BossEntry> byKey = new();
 		private readonly Dictionary<int, BossEntry> byNpc = new();
 		private readonly Dictionary<int, List<BossEntry>> bySummonItem = new();
+		private readonly Dictionary<int, BossEntry> byLavaItem = new();
+		private readonly List<BossEntry> events = new();
 
 		// unregistered modded bosses caught by the fallback, never listed in All
 		private readonly Dictionary<int, BossEntry> unknownByNpc = new();
@@ -18,6 +20,8 @@ namespace TerrariaTogether.Modules.Gating.Registry
 		public static BossRegistry Instance => ModContent.GetInstance<BossRegistry>();
 
 		public IEnumerable<BossEntry> All => byKey.Values;
+
+		public IReadOnlyList<BossEntry> Events => events;
 
 		public override void Load()
 		{
@@ -29,6 +33,8 @@ namespace TerrariaTogether.Modules.Gating.Registry
 			byKey.Clear();
 			byNpc.Clear();
 			bySummonItem.Clear();
+			byLavaItem.Clear();
+			events.Clear();
 			unknownByNpc.Clear();
 		}
 
@@ -54,6 +60,10 @@ namespace TerrariaTogether.Modules.Gating.Registry
 					bySummonItem[item] = list = new List<BossEntry>();
 				list.Add(entry);
 			}
+			foreach (int item in entry.LavaSummonItems)
+				byLavaItem.TryAdd(item, entry);
+			if (entry.IsEvent)
+				events.Add(entry);
 			return true;
 		}
 
@@ -62,6 +72,8 @@ namespace TerrariaTogether.Modules.Gating.Registry
 		public BossEntry ByNpc(int npcType) => byNpc.GetValueOrDefault(npcType);
 
 		public List<BossEntry> BySummonItem(int itemType) => bySummonItem.GetValueOrDefault(itemType);
+
+		public BossEntry ByLavaItem(int itemType) => byLavaItem.GetValueOrDefault(itemType);
 
 		// registered boss for this npc, or a fallback entry for unregistered modded bosses when the policy says so
 		public BossEntry Resolve(NPC npc)

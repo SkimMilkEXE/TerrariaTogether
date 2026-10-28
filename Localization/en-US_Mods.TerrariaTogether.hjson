@@ -59,6 +59,20 @@ Configs: {
 		Tooltip: ""
 	}
 
+	MidFightPolicy: {
+		Continue: {
+			Label: Continue
+			Tooltip: ""
+		}
+
+		DespawnAfterWarning: {
+			Label: Despawn after warning
+			Tooltip: ""
+		}
+
+		Tooltip: ""
+	}
+
 	GatingConfig: {
 		DisplayName: Gating
 
@@ -85,6 +99,16 @@ Configs: {
 		UnknownBosses: {
 			Label: Unknown bosses
 			Tooltip: Modded bosses that neither Boss Checklist nor their own mod told Terraria Together about. Gate uses the shared threshold, Ignore lets them spawn freely.
+		}
+
+		MidFight: {
+			Label: Mid-fight
+			Tooltip: What happens when a boss becomes locked during its fight, e.g. someone leaves. Continue lets the fight finish. Despawn after warning gives the group time to get back online, then sends the boss away.
+		}
+
+		MidFightWarningSeconds: {
+			Label: Mid-fight warning (seconds)
+			Tooltip: How long a locked boss stays before leaving, when Mid-fight is Despawn after warning.
 		}
 
 		Headers: {
@@ -145,6 +169,14 @@ Gating: {
 		BossAmbiguous: More than one boss matches "{0}". Use the full key, like Terraria/EyeOfCthulhu.
 	}
 
+	EventsHeading: "{0} events"
+
+	MidFight: {
+		Warning: "{0} is locked: {1}/{2} online (need {3}). It will leave in {4} seconds unless enough members come online."
+		Stays: Enough members are online again, {0} stays.
+		Left: "{0} left because not enough members were online."
+	}
+
 	Bosses: {
 		KingSlime: King Slime
 		EyeOfCthulhu: Eye of Cthulhu
@@ -164,6 +196,13 @@ Gating: {
 		EmpressOfLight: Empress of Light
 		LunaticCultist: Lunatic Cultist
 		MoonLord: Moon Lord
+		GoblinArmy: Goblin Army
+		FrostLegion: Frost Legion
+		Pirates: Pirate Invasion
+		MartianMadness: Martian Madness
+		PumpkinMoon: Pumpkin Moon
+		FrostMoon: Frost Moon
+		OldOnesArmy: Old One's Army
 	}
 }
 

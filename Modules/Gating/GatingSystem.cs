@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace TerrariaTogether.Modules.Gating
 		private int sentOnline = -1;
 		private int sentTotal = -1;
 		private bool? announcedLocked;
+
+		// server only: the last boss spawn a player asked for (altar, summon item), so a veto can refund them
+		private int requestPlayer = -1;
+		private int requestNpcType;
+		private uint requestTick;
 
 		public static GatingSystem Instance => ModContent.GetInstance<GatingSystem>();
 
@@ -160,6 +166,43 @@ namespace TerrariaTogether.Modules.Gating
 			}
 		}
 
+		// clients ask the server to spawn bosses with this message (summon items, golem's altar),
+		// natural spawns never send it, so it tells a player's summon apart from a natural one
+		public override bool HijackGetData(ref byte messageType, ref BinaryReader reader, int playerNumber)
+		{
+			if (messageType != MessageID.SpawnBossUseLicenseStartEvent || Main.netMode != NetmodeID.Server)
+				return false;
+
+			long start = reader.BaseStream.Position;
+			try
+			{
+				reader.ReadInt16(); // player index as the client claims it, playerNumber is trusted instead
+				requestNpcType = reader.ReadInt16();
+				requestPlayer = playerNumber;
+				requestTick = Main.GameUpdateCount;
+			}
+			catch (Exception)
+			{
+				// malformed message, let terraria deal with it
+			}
+			finally
+			{
+				reader.BaseStream.Position = start;
+			}
+			return false;
+		}
+
+		// the player who asked for this spawn in the same tick, or -1; each request is only used once
+		public int TakeSpawnRequester(int npcType)
+		{
+			if (requestPlayer < 0 || requestNpcType != npcType || requestTick != Main.GameUpdateCount)
+				return -1;
+
+			int player = requestPlayer;
+			requestPlayer = -1;
+			return player;
+		}
+
 		public void RequestSync()
 		{
 			SmpPackets.Create(GatingModule.ModuleId, MsgRequestSync).Send();
@@ -198,6 +241,7 @@ namespace TerrariaTogether.Modules.Gating
 			sentOnline = -1;
 			sentTotal = -1;
 			announcedLocked = null;
+			requestPlayer = -1;
 		}
 	}
 

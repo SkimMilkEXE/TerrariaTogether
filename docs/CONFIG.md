@@ -40,6 +40,8 @@ File: `ModConfigs/TerrariaTogether_GatingConfig.json` (admins can change it in g
 | **First kill only** | on | Once a boss has been beaten it stays unlocked, so it can be farmed with any number of players. |
 | **Announce changes** | on | Server chat message when bosses lock or unlock, and when an admin locks or unlocks a boss. |
 | **Unknown bosses** | Gate | Modded NPCs flagged as bosses that neither Boss Checklist nor their own mod registered. **Gate** uses the shared threshold (but **First kill only** can't apply, and their summon items aren't blocked). **Ignore** lets them spawn freely. |
+| **Mid-fight** | Continue | What happens when a boss becomes locked during its fight (someone left). **Continue** lets it finish. **Despawn after warning** warns everyone, then sends the boss away if the group is still short when time runs out. |
+| **Mid-fight warning (seconds)** | 30 | How long the boss stays after the warning. |
 | **Gated bosses** | all on | One on/off switch per boss, by name. Turn a boss off to never lock it. Bosses from other mods appear here automatically. |
 | **Simulated online** (Debug) | -1 | Pretend this many members are online, for testing thresholds solo. -1 turns it off. |
 | **Simulated members** (Debug) | -1 | Pretend the member total is this. -1 turns it off. |
@@ -52,10 +54,12 @@ Members needed = the larger of **Minimum online** and **Threshold** × member to
 For example, with 6 members at 75%: 6 × 0.75 = 4.5 → **5 needed**.
 Only members count as online: excluded members and players who aren't on the roster don't.
 
-When a boss is locked:
+When a boss or event is locked:
 - its summon item's tooltip says "Locked: 1/2 online (need 2)" (or "Unlocked")
 - its summon item can't be used, so it isn't lost, and you see "Eye of Cthulhu is locked: 1/2 online (need 2)."
-- if it spawns some other way, it's sent away straight after spawning and the whole server sees why. Items used this way (power cell, truffle worm, voodoo doll) are lost for now.
+- if it spawns some other way, it's sent away straight after spawning and the whole server sees why. If a player summoned it (Lihzahrd Power Cell on Golem's altar, Truffle Worm, or a summon item used before their client knew about the lock), the item is given back. Natural spawns (Eye of Cthulhu at night, mechanical bosses) are simply sent away.
+- a Guide Voodoo Doll thrown into lava floats on the surface instead of sinking, so the Guide survives and Wall of Flesh doesn't spawn.
+- an event (Goblin Army, Frost Legion, Pirates, Martian Madness, Pumpkin Moon, Frost Moon, Old One's Army) is stopped the moment it starts. Events that started while unlocked always run to the end. Event summon items are blocked like boss summon items, except the Eternia Crystal, which is used up.
 
 ### Bosses from other mods
 

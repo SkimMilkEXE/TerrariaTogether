@@ -84,3 +84,22 @@ Enable Calamity and Boss Checklist alongside Terraria Together, on both server a
 | Unlock, start a fight, set **Minimum online** back up mid-fight | Fight continues untouched |
 | Without Boss Checklist enabled | Log has no import line; Calamity bosses still blocked at spawn via **Unknown bosses** (status doesn't list them) |
 | **Unknown bosses** = Ignore, without Boss Checklist | Calamity bosses spawn freely |
+
+### Edge cases (Phase 6)
+
+Bosses locked unless a row says otherwise. Hardmode rows need a hardmode test world.
+
+| Test | Expected |
+|------|----------|
+| Throw a Guide Voodoo Doll into lava (Guide alive) | Doll floats on the lava, Guide lives, chat says Wall of Flesh is locked |
+| Unlock, throw it again | Wall of Flesh spawns as normal |
+| Lihzahrd Power Cell on Golem's altar | Golem sent away, the power cell comes back to you |
+| Fish with a Truffle Worm in the ocean | Duke sent away, the truffle worm comes back |
+| Wait for a night where Eye of Cthulhu spawns naturally (or `/time` cheats) | Eye sent away, no item appears |
+| Goblin Battle Standard | Not used up, "Goblin Army is locked..." |
+| Start an event while unlocked, then lock mid-event | Event keeps going |
+| Save and quit during an unlocked event, lock, reload | Event keeps going |
+| **Gated bosses** | Events listed under a "Terraria events" heading, after all the bosses |
+| **Mid-fight** = Despawn after warning, warning 10 s: start a fight unlocked, then raise **Minimum online** | Warning in chat; boss and its parts leave 10 s later |
+| Same, but lower **Minimum online** again before time runs out | "Enough members are online again, ... stays." |
+| **Mid-fight** = Continue | Raising **Minimum online** mid-fight changes nothing |
