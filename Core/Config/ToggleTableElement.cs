@@ -6,6 +6,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
+using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 using Terraria.ModLoader.Config;
 using Terraria.ModLoader.Config.UI;
@@ -17,6 +18,7 @@ namespace TerrariaTogether.Core.Config
 	// rows come from code (registry, module list), so entries missing from the dictionary show as on
 	public abstract class ToggleTableElement : ConfigElement<Dictionary<string, bool>>
 	{
+		// a row with a null key is drawn as a group heading instead of a toggle
 		protected abstract IEnumerable<(string Key, string Label)> Rows();
 
 		public override void OnBind()
@@ -35,7 +37,21 @@ namespace TerrariaTogether.Core.Config
 			int top = 30; // leaves room for this element's own label
 			int order = 0;
 			foreach ((string key, string label) in Rows())
+			{
+				if (key == null)
+				{
+					var heading = new UIText(label, 0.9f);
+					heading.Top.Set(top + 6, 0f);
+					heading.Left.Set(12, 0f);
+					Append(heading);
+					top += 30;
+					continue;
+				}
 				ConfigManager.WrapIt(this, ref top, wrapper, new ToggleRow(table, key, label), order++);
+			}
+
+			// ui elements are capped at screen height by default, long lists (calamity + vanilla) go past that
+			MaxHeight.Set(int.MaxValue, 0f);
 			Height.Set(top, 0f);
 		}
 	}

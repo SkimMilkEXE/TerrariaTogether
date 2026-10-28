@@ -39,6 +39,7 @@ File: `ModConfigs/TerrariaTogether_GatingConfig.json` (admins can change it in g
 | **Minimum online** | 2 | Bosses stay locked with fewer than this many members online, whatever the percent says. |
 | **First kill only** | on | Once a boss has been beaten it stays unlocked, so it can be farmed with any number of players. |
 | **Announce changes** | on | Server chat message when bosses lock or unlock, and when an admin locks or unlocks a boss. |
+| **Unknown bosses** | Gate | Modded NPCs flagged as bosses that neither Boss Checklist nor their own mod registered. **Gate** uses the shared threshold (but **First kill only** can't apply, and their summon items aren't blocked). **Ignore** lets them spawn freely. |
 | **Gated bosses** | all on | One on/off switch per boss, by name. Turn a boss off to never lock it. Bosses from other mods appear here automatically. |
 | **Simulated online** (Debug) | -1 | Pretend this many members are online, for testing thresholds solo. -1 turns it off. |
 | **Simulated members** (Debug) | -1 | Pretend the member total is this. -1 turns it off. |
@@ -55,6 +56,14 @@ When a boss is locked:
 - its summon item's tooltip says "Locked: 1/2 online (need 2)" (or "Unlocked")
 - its summon item can't be used, so it isn't lost, and you see "Eye of Cthulhu is locked: 1/2 online (need 2)."
 - if it spawns some other way, it's sent away straight after spawning and the whole server sees why. Items used this way (power cell, truffle worm, voodoo doll) are lost for now.
+
+### Bosses from other mods
+
+- **With [Boss Checklist](https://steamcommunity.com/sharedfiles/filedetails/?id=2669644269) installed**, every modded boss it knows about is gated automatically and shows up in **Gated bosses** and `/smp gating status`. Most big content mods (Calamity, Thorium, ...) register with Boss Checklist.
+- **Mods can also register directly** through `Mod.Call` (see `API.md`).
+- **Anything else** flagged as a boss follows **Unknown bosses**.
+
+A locked boss only stops new fights. Minions and segments spawned during a fight that's already running are never removed.
 
 ## Commands
 

@@ -10,10 +10,11 @@ namespace TerrariaTogether.Modules.Gating.Registry
 
 		public LocalizedText DisplayName;
 
-		// npcs that start the fight, these are the ones vetoed
+		// npcs that start the fight
 		public int[] SpawnNpcs;
 
 		// every other npc belonging to the fight (segments, hands, eyes...)
+		// any of these is vetoed while locked unless a fight with this boss is already running
 		public int[] PartNpcs;
 
 		public int[] SummonItems;

@@ -3,7 +3,6 @@ using Terraria;
 using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using TerrariaTogether.Modules.Gating.Registry;
 
@@ -16,10 +15,10 @@ namespace TerrariaTogether.Modules.Gating.Globals
 
 		public override bool InstancePerEntity => true;
 
-		// only boss spawn npcs get an instance, so normal enemies don't pay for this
+		// only boss npcs get an instance, so normal enemies don't pay for this
 		public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
 		{
-			return lateInstantiation && BossRegistry.Instance.BySpawnNpc(entity.type) != null;
+			return lateInstantiation && (BossRegistry.Instance.ByNpc(entity.type) != null || BossRegistry.IsUnknownBoss(entity));
 		}
 
 		// killing in OnSpawn is unreliable, so flag here and despawn in PreAI
@@ -28,8 +27,8 @@ namespace TerrariaTogether.Modules.Gating.Globals
 			if (Main.netMode != NetmodeID.Server || !GatingModule.IsEnabled)
 				return;
 
-			BossEntry boss = BossRegistry.Instance.BySpawnNpc(npc.type);
-			if (boss == null)
+			BossEntry boss = BossRegistry.Instance.Resolve(npc);
+			if (boss == null || FightRunning(boss, npc))
 				return;
 
 			LockResult result = GatingSystem.Instance.Evaluate(boss);
@@ -39,6 +38,20 @@ namespace TerrariaTogether.Modules.Gating.Globals
 			vetoed = true;
 			Mod.Logger.Info($"gating: vetoed {boss.Key} spawn ({result.Online}/{result.Total}, need {result.Required})");
 			ChatHelper.BroadcastChatMessage(GatingSystem.LockedText(boss, result), Color.OrangeRed);
+		}
+
+		// minions and segments spawned mid-fight are left alone, a locked boss only stops new fights
+		// npcs already being vetoed don't count, so both twins are stopped when they spawn together
+		private static bool FightRunning(BossEntry boss, NPC self)
+		{
+			foreach (NPC other in Main.ActiveNPCs)
+			{
+				if (other.whoAmI == self.whoAmI || BossRegistry.Instance.Resolve(other) != boss)
+					continue;
+				if (!other.TryGetGlobalNPC(out GateGlobalNPC gate) || !gate.vetoed)
+					return true;
+			}
+			return false;
 		}
 
 		public override bool PreAI(NPC npc)

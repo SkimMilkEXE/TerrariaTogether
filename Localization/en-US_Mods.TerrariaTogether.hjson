@@ -45,6 +45,20 @@ Configs: {
 		Tooltip: ""
 	}
 
+	UnknownBossPolicy: {
+		Gate: {
+			Label: Gate
+			Tooltip: ""
+		}
+
+		Ignore: {
+			Label: Ignore
+			Tooltip: ""
+		}
+
+		Tooltip: ""
+	}
+
 	GatingConfig: {
 		DisplayName: Gating
 
@@ -66,6 +80,11 @@ Configs: {
 		Announce: {
 			Label: Announce changes
 			Tooltip: Server chat message when bosses lock or unlock, and when an admin locks or unlocks a boss.
+		}
+
+		UnknownBosses: {
+			Label: Unknown bosses
+			Tooltip: Modded bosses that neither Boss Checklist nor their own mod told Terraria Together about. Gate uses the shared threshold, Ignore lets them spawn freely.
 		}
 
 		Headers: {

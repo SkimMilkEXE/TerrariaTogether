@@ -69,3 +69,18 @@ Solo setup: one member online, defaults (75%, min 2), so everything is locked. S
 | **Gated bosses**: turn King Slime off while locked | Slime Crown works; status says "not gated in config" |
 | ...then `/smp gating lock king slime` | Locked again (commands beat the table) |
 | Open **Server Settings** / **Gating** | **Modules** shows Gating, **Gated bosses** shows all 18 bosses by name, each with a toggle, no text boxes or +/- buttons. Save button lights up after a toggle; **Restore defaults** turns everything back on |
+
+### Other mods (Phase 5)
+
+Enable Calamity and Boss Checklist alongside Terraria Together, on both server and client.
+
+| Test | Expected |
+|------|----------|
+| `server.log` after start | "gating: imported N bosses from boss checklist" with N > 0 |
+| `/smp gating status` | Calamity bosses listed after the vanilla ones, e.g. Desert Scourge |
+| **Gated bosses** in config | Calamity bosses listed with toggles |
+| Locked: use Desert Medallion (Desert Scourge) in the desert | Not used up, "Desert Scourge is locked..." |
+| Unlocked: Desert Scourge fight | All segments spawn normally, nothing is removed mid-fight |
+| Unlock, start a fight, set **Minimum online** back up mid-fight | Fight continues untouched |
+| Without Boss Checklist enabled | Log has no import line; Calamity bosses still blocked at spawn via **Unknown bosses** (status doesn't list them) |
+| **Unknown bosses** = Ignore, without Boss Checklist | Calamity bosses spawn freely |
