@@ -1,5 +1,12 @@
-Turns a multiplayer server into a survival multiplayer (SMP) world for a group of friends.
+Turns a multiplayer server into a survival multiplayer (SMP) world that a group of friends shares over weeks.
 
-Built as a small core plus switchable modules. The first module, Gating, keeps bosses locked until enough of the group is online, so nobody gets far ahead of everyone else.
+Built as a small core plus modules. Server admins switch each one on or off in Server Settings:
 
-Server-side rules. Single-player is not affected.
+- Gating: bosses and events stay locked until enough of the group is online, so nobody gets far ahead of everyone else. Works with modded bosses through Boss Checklist.
+- Stats: playtime, deaths, boss kills and PvP kills for each player, with /smp stats and a top 5 leaderboard.
+- Welcome and rules: a welcome message when players join, the server rules on their first join, and an optional "accept the rules before building" step.
+- Discord log: posts joins, leaves, chat, deaths and first boss kills to a Discord channel through a webhook.
+
+Type /smp help in game to see the commands.
+
+The server makes every decision. Gating and the rules don't apply in single-player.

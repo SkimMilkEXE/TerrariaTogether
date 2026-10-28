@@ -1,1 +1,24 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+Turns a multiplayer server into a survival multiplayer (SMP) world that a group of friends shares over weeks.
+
+Built as a small core plus modules. Server admins switch each one on or off in [b]Settings > Mod Configuration > Terraria Together > Server Settings[/b].
+
+[h2]Modules[/h2]
+[list]
+[*][b]Gating[/b]: bosses and events stay locked until enough of the group is online (75% and at least 2 players by default), so nobody gets far ahead of everyone else. Summon items aren't used up while locked. Modded bosses are gated automatically when Boss Checklist is installed.
+[*][b]Stats[/b]: playtime, deaths, boss kills and PvP kills for each player. [i]/smp stats[/i] shows them, and [i]/smp stats top[/i] shows a top 5 leaderboard.
+[*][b]Welcome and rules[/b]: a welcome message every time players join, the server rules on their first join, and an optional "accept the rules before building" step ([i]/smp rules accept[/i]).
+[*][b]Discord log[/b]: posts joins, leaves, chat, deaths and first boss kills to a Discord channel through a webhook.
+[/list]
+
+[h2]Getting started[/h2]
+[list]
+[*]Install the mod on the server and on every player's game.
+[*]Add yourself as an admin: open [b]Server Settings[/b] in a single-player world, add your character name to [b]Admins[/b], save, then restart the server.
+[*]Type [i]/smp help[/i] in game to see the commands.
+[/list]
+
+[h2]Notes[/h2]
+[list]
+[*]The server makes every decision. Gating and the rules don't apply in single-player.
+[*]Other mods can register bosses through [i]Mod.Call[/i].
+[/list]
