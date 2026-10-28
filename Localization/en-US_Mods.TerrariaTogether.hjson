@@ -12,7 +12,7 @@ Configs: {
 
 		Modules: {
 			Label: Modules
-			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats).
+			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats). Welcome and rules greets players and shows the server rules (settings are under Welcome and rules).
 		}
 
 		Admins: {
@@ -71,6 +71,35 @@ Configs: {
 		}
 
 		Tooltip: ""
+	}
+
+	RulesConfig: {
+		DisplayName: Welcome and rules
+
+		ShowWelcome: {
+			Label: Show welcome message
+			Tooltip: Send the welcome message to each player every time they join.
+		}
+
+		WelcomeMessage: {
+			Label: Welcome message
+			Tooltip: "{name} is replaced with the player's name and {world} with the world's name."
+		}
+
+		ShowRules: {
+			Label: Show rules
+			Tooltip: Show the rules to players the first time they join, and again whenever the rules change.
+		}
+
+		Rules: {
+			Label: Rules
+			Tooltip: One rule per line. They're numbered when shown.
+		}
+
+		RequireAccept: {
+			Label: Must accept rules to build
+			Tooltip: Players can't place or break blocks until they type /smp rules accept. The rules show on every join until they do, and again whenever the rules change.
+		}
 	}
 
 	GatingConfig: {
@@ -136,6 +165,19 @@ Configs: {
 ModuleNames: {
 	gating: Gating
 	stats: Stats
+	rules: Welcome and rules
+}
+
+Rules: {
+	Header: Server rules:
+	Line: "  {0}. {1}"
+	Changed: The server rules have changed.
+	AcceptHint: Type /smp rules accept to agree to the rules. You can't build until you do.
+	Accepted: Thanks for accepting the rules, you can build now.
+	BuildBlocked: Accept the rules before building. Type /smp rules to read them.
+	NoRules: This server has no rules set.
+	ConsoleAccept: Only players can accept the rules.
+	Usage: Usage: /smp rules [accept]
 }
 
 Stats: {

@@ -23,6 +23,10 @@ See `CONFIG.md` for its settings.
 Playtime, deaths, boss kills and PvP kills per player, shown with `/smp stats [player]`
 and a top 5 with `/smp stats top <stat>`.
 
+### Welcome and rules (`rules`)
+A configurable welcome message on every join, server rules on first join and whenever they change,
+and an optional accept-rules step (`/smp rules accept`) before players can build.
+
 ## Small
 
 ### AFK detection (Core) — Idea
@@ -53,9 +57,6 @@ Main challenge: keeping the saved data small.
 
 ### Votes (`votes`) — Idea
 `/smp vote <thing>` for group decisions: skip the night, start an event, let someone fight a boss early.
-
-### Welcome and rules (`welcome`) — Idea
-Message of the day, server rules on first join, and optionally an accept-rules step before building.
 
 ## Large
 

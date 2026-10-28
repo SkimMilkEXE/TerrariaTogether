@@ -69,6 +69,22 @@ When a boss or event is locked:
 
 A locked boss only stops new fights. Minions and segments spawned during a fight that's already running are never removed.
 
+## Welcome and rules
+
+Greets players when they join and shows the server rules.
+
+File: `ModConfigs/TerrariaTogether_RulesConfig.json` (admins can change it in game).
+
+| Option | Default | What it does |
+|--------|---------|--------------|
+| **Show welcome message** | on | Sends the welcome message to each player every time they join. |
+| **Welcome message** | `Welcome to {world}, {name}!` | `{name}` becomes the player's name, `{world}` the world's name. |
+| **Show rules** | on | Shows the rules on a player's first join, and again whenever the rules change. |
+| **Rules** | 3 starter rules | One rule per line, numbered when shown. |
+| **Must accept rules to build** | off | Players can't place or break blocks or walls until they type `/smp rules accept`. The rules show on every join until they do. When the rules change, everyone has to accept again. Single-player worlds are never blocked. |
+
+Who has seen and accepted which version of the rules is saved with the world.
+
 ## Stats
 
 Tracks each player's playtime, deaths, boss kills and PvP kills in this world. No settings, turn it on or off under **Modules**.
@@ -97,6 +113,8 @@ Commands run on the server in multiplayer and also work in the server console (w
 | `/smp gating lock <boss>` | admins | Keeps a boss locked whatever the numbers say |
 | `/smp gating unlock <boss>` | admins | Keeps a boss unlocked whatever the numbers say |
 | `/smp gating clear <boss>` | admins | Puts a boss back on the normal rules |
+| `/smp rules` | everyone | Shows the server rules |
+| `/smp rules accept` | everyone | Accepts the rules, so you can build when **Must accept rules to build** is on |
 | `/smp stats [player]` | everyone | Shows your stats, or another player's |
 | `/smp stats top [playtime\|deaths\|bosses\|pvp]` | everyone | Top 5 players for that stat (playtime if left out) |
 | `/smp <module> ...` | depends | Runs a module's commands. Turned-off modules refuse their commands. |

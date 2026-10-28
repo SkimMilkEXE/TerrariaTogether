@@ -104,6 +104,24 @@ Bosses locked unless a row says otherwise. Hardmode rows need a hardmode test wo
 | Same, but lower **Minimum online** again before time runs out | "Enough members are online again, ... stays." |
 | **Mid-fight** = Continue | Raising **Minimum online** mid-fight changes nothing |
 
+### Welcome and rules
+
+| Test | Expected |
+|------|----------|
+| Join | Gold "Welcome to <world>, <you>!" then "Server rules:" with 3 numbered rules |
+| Leave and join again | Welcome only, no rules |
+| Change **Welcome message**, rejoin | New text, `{name}` and `{world}` filled in |
+| Turn **Show welcome message** / **Show rules** off, rejoin | Nothing shown for the one turned off |
+| Edit a rule while online | Everyone online sees "The server rules have changed." and the new rules |
+| **Must accept rules to build** on, new player joins | Rules plus "Type /smp rules accept..." |
+| ...try to place a block, dig, chop a tree | Blocked, "Accept the rules before building..." |
+| ...`/smp rules accept`, then build | "Thanks for accepting..." and building works |
+| Rejoin after accepting | Welcome only, building works |
+| Edit a rule | Building blocked again until `/smp rules accept` |
+| Turn **Must accept rules to build** off | Building works straight away without accepting |
+| Single player with it on | Never blocked |
+| Console: `smp rules` | Lists the rules |
+
 ### Stats
 
 Turn Gating off (or unlock bosses) for the boss rows.
