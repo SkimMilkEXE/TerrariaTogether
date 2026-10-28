@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 using TerrariaTogether.Core.Config;
 using TerrariaTogether.Core.Roster;
 
@@ -41,6 +42,21 @@ namespace TerrariaTogether.Core.Permissions
 					return true;
 			}
 			return false;
+		}
+
+		// server only: adds the player's short id to the admins list in Server Settings and saves it
+		public static void AddAdmin(string uuid, string name)
+		{
+			var config = ModContent.GetInstance<CoreServerConfig>();
+			string id = PresenceTracker.ShortId(uuid);
+			if (config.Admins.Exists(e => e != null && (e.Trim().Equals(id, StringComparison.OrdinalIgnoreCase) || e.Trim().Equals(uuid, StringComparison.OrdinalIgnoreCase))))
+				return;
+
+			// changes go through a copy, tmodloader applies and syncs it on save
+			var pending = (CoreServerConfig)ConfigManager.GeneratePopulatedClone(config);
+			pending.Admins.Add(id);
+			config.SaveChanges(pending, broadcast: false);
+			ModContent.GetInstance<TerrariaTogether>().Logger.Info($"permissions: added {name} ({id}) to admins");
 		}
 
 		// replies with a refusal and returns false when the caller isn't an admin

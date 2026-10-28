@@ -35,6 +35,10 @@ Note: two clients on the same PC may send the same ID and count as one member. C
 | Non-admin saves **Server Settings** | Refused with "Only server admins can do that." |
 | Join, then `/smp whoami` | Shows name and an 8-character ID (not "not received yet") |
 | Admin by ID in **Admins**, `/smp whoami` | Says admin |
+| New world, empty **Admins**, first player joins, `/smp whoami` | Says admin; their 8-character ID is now in **Admins**; `server.log` has "added <name> (<id>) to admins" |
+| Remove that ID from **Admins**, rejoin | Not admin any more, and not added back |
+| Second player joins the same world | Not admin |
+| Restart server, owner rejoins | Still admin |
 | Auto mode: join, `/smp roster` | You're listed as online, "1 of 1 members online" |
 | Leave, console: `smp roster` | Listed with "last seen 0 days ago", "0 of 1" |
 | Restart server, console: `smp roster` | Roster is still there |

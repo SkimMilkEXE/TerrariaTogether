@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerrariaTogether.Core.Config;
+using TerrariaTogether.Core.Permissions;
 
 namespace TerrariaTogether.Core.Roster
 {
@@ -15,6 +18,29 @@ namespace TerrariaTogether.Core.Roster
 		private readonly List<RosterMember> members = new();
 
 		public IReadOnlyList<RosterMember> Members => members;
+
+		// uuid of the first player to join this world, added to the admins list once
+		public string OwnerUuid { get; private set; }
+
+		// the owner joins before their client can take config updates, so they're made admin once they're in the world
+		private string pendingAdminUuid;
+
+		public override void PostUpdateEverything()
+		{
+			if (pendingAdminUuid == null || Main.netMode != NetmodeID.Server)
+				return;
+
+			for (int i = 0; i < Main.maxPlayers; i++)
+			{
+				Player player = Main.player[i];
+				if (player.active && PresenceTracker.Instance.GetUuid(player) == pendingAdminUuid)
+				{
+					SmpPermissions.AddAdmin(pendingAdminUuid, player.name);
+					pendingAdminUuid = null;
+					return;
+				}
+			}
+		}
 
 		public static RosterSystem Instance => ModContent.GetInstance<RosterSystem>();
 
@@ -44,6 +70,13 @@ namespace TerrariaTogether.Core.Roster
 		// called on the server once a joining player's uuid is known
 		public void OnJoin(string uuid, string name)
 		{
+			if (OwnerUuid == null)
+			{
+				OwnerUuid = uuid;
+				Mod.Logger.Info($"roster: {name} is the world owner");
+				pendingAdminUuid = uuid;
+			}
+
 			RosterMember member = Find(uuid);
 			if (member == null)
 			{
@@ -92,6 +125,7 @@ namespace TerrariaTogether.Core.Roster
 			tag["roster"] = new TagCompound
 			{
 				["version"] = SaveVersion,
+				["owner"] = OwnerUuid ?? "",
 				["members"] = members.Select(m => new TagCompound
 				{
 					["uuid"] = m.Uuid,
@@ -105,10 +139,14 @@ namespace TerrariaTogether.Core.Roster
 		public override void LoadWorldData(TagCompound tag)
 		{
 			members.Clear();
+			OwnerUuid = null;
 			if (!tag.TryGet("roster", out TagCompound roster))
 				return;
 
 			// version 1 is the only shape so far, migrate here when it changes
+			// owner was added later without a version bump, older saves just don't have it
+			string owner = roster.GetString("owner");
+			OwnerUuid = string.IsNullOrEmpty(owner) ? null : owner;
 			foreach (TagCompound t in roster.GetList<TagCompound>("members"))
 			{
 				members.Add(new RosterMember
@@ -124,6 +162,8 @@ namespace TerrariaTogether.Core.Roster
 		public override void ClearWorld()
 		{
 			members.Clear();
+			OwnerUuid = null;
+			pendingAdminUuid = null;
 		}
 	}
 }

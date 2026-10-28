@@ -16,7 +16,9 @@ The roster itself (who's a member) is saved with the world, not in the config fi
 
 The server console is always an admin.
 
-The file only appears once settings have been saved, so on a fresh server it won't exist yet. To add the first admin, either:
+The first player to join a world (the host, for Host & Play) is added to **Admins** automatically, by their player ID. This only happens once per world, so removing them from the list afterwards sticks. On a world from before this was added, the next player to join is the one added, so join first yourself.
+
+The file only appears once settings have been saved, so on a fresh server it won't exist yet. The world owner can add admins in game. To add one without joining, either:
 - create the file yourself:
   ```json
   {
