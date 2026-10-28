@@ -103,3 +103,21 @@ Bosses locked unless a row says otherwise. Hardmode rows need a hardmode test wo
 | **Mid-fight** = Despawn after warning, warning 10 s: start a fight unlocked, then raise **Minimum online** | Warning in chat; boss and its parts leave 10 s later |
 | Same, but lower **Minimum online** again before time runs out | "Enough members are online again, ... stays." |
 | **Mid-fight** = Continue | Raising **Minimum online** mid-fight changes nothing |
+
+### Stats
+
+Turn Gating off (or unlock bosses) for the boss rows.
+
+| Test | Expected |
+|------|----------|
+| Play 2 minutes, `/smp stats` | "Stats for <you>:", playtime 0h 2m |
+| Die to anything, `/smp stats` | Deaths 1 |
+| Two players, PvP on, one kills the other | Killer: PvP kills 1. Victim: deaths 1 |
+| Kill Eye of Cthulhu with two players hitting it | Both get bosses killed 1 |
+| Player who never hit the boss | Bosses killed unchanged |
+| The Twins, Eater of Worlds, The Destroyer, Golem, Moon Lord | Each counts as **1** boss kill, not one per part |
+| `/smp stats <other player>` | Their stats; unknown name says "No stats for a player named ..." |
+| `/smp stats top`, `top deaths`, `top bosses`, `top pvp` | Up to 5 names, highest first; `top nonsense` shows usage |
+| Console: `smp stats` | Usage; `smp stats <name>` works |
+| Restart server | Stats still there |
+| Turn Stats off in **Modules** | `/smp stats` refused, nothing counts; on again and old stats are back |

@@ -12,7 +12,7 @@ Configs: {
 
 		Modules: {
 			Label: Modules
-			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating).
+			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats).
 		}
 
 		Admins: {
@@ -133,7 +133,33 @@ Configs: {
 	}
 }
 
-ModuleNames.gating: Gating
+ModuleNames: {
+	gating: Gating
+	stats: Stats
+}
+
+Stats: {
+	Playtime: "{0}h {1}m"
+
+	Commands: {
+		Usage: Usage: /smp stats [player | top <playtime | deaths | bosses | pvp>]
+		Header: "Stats for {0}:"
+		Line: "  Playtime {0}, deaths {1}, bosses killed {2}, PvP kills {3}"
+		TopHeader: "Top {0}:"
+		TopLine: "  {0}. {1}: {2}"
+		TopEmpty: "  Nobody has any yet."
+		NotFound: No stats for a player named "{0}".
+		Ambiguous: More than one player is named "{0}". Ask one of them to rename and rejoin.
+		NoUuid: Your stats aren't ready yet, try again in a moment.
+
+		Boards: {
+			playtime: playtime
+			deaths: deaths
+			bosses: boss kills
+			pvp: PvP kills
+		}
+	}
+}
 
 Gating: {
 	Locked: "{0} is locked: {1}/{2} online (need {3})."

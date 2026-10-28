@@ -69,6 +69,15 @@ When a boss or event is locked:
 
 A locked boss only stops new fights. Minions and segments spawned during a fight that's already running are never removed.
 
+## Stats
+
+Tracks each player's playtime, deaths, boss kills and PvP kills in this world. No settings, turn it on or off under **Modules**.
+Stats are saved with the world and kept while the module is off.
+
+- **Playtime** counts while the player is in the world.
+- **Boss kills** go to every player who hit the boss, the same rule the game uses for loot. Bosses made of several parts (The Twins, Eater of Worlds) count once.
+- Stats follow the player's ID, so renaming a character keeps them. Anyone who joins gets stats, members or not.
+
 ## Commands
 
 Boss names can be typed as the name (`eye of cthulhu`), without spaces (`eyeofcthulhu`) or as the full key (`Terraria/EyeOfCthulhu`). Case doesn't matter.
@@ -88,4 +97,6 @@ Commands run on the server in multiplayer and also work in the server console (w
 | `/smp gating lock <boss>` | admins | Keeps a boss locked whatever the numbers say |
 | `/smp gating unlock <boss>` | admins | Keeps a boss unlocked whatever the numbers say |
 | `/smp gating clear <boss>` | admins | Puts a boss back on the normal rules |
+| `/smp stats [player]` | everyone | Shows your stats, or another player's |
+| `/smp stats top [playtime\|deaths\|bosses\|pvp]` | everyone | Top 5 players for that stat (playtime if left out) |
 | `/smp <module> ...` | depends | Runs a module's commands. Turned-off modules refuse their commands. |

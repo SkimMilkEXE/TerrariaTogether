@@ -19,6 +19,10 @@ Bosses and events stay locked until enough of the group is online, so nobody get
 everyone else. Works with modded bosses through Boss Checklist and `Mod.Call`.
 See `CONFIG.md` for its settings.
 
+### Playtime and stats (`stats`)
+Playtime, deaths, boss kills and PvP kills per player, shown with `/smp stats [player]`
+and a top 5 with `/smp stats top <stat>`.
+
 ## Small
 
 ### AFK detection (Core) — Idea
@@ -52,9 +56,6 @@ Main challenge: keeping the saved data small.
 
 ### Welcome and rules (`welcome`) — Idea
 Message of the day, server rules on first join, and optionally an accept-rules step before building.
-
-### Playtime and stats (`stats`) — Idea
-Hours played, deaths and boss kills per member, shown with `/smp stats`.
 
 ## Large
 

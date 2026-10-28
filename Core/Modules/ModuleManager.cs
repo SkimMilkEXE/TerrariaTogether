@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria.ModLoader;
 using TerrariaTogether.Core.Config;
 using TerrariaTogether.Modules.Gating;
+using TerrariaTogether.Modules.Stats;
 
 namespace TerrariaTogether.Core.Modules
 {
@@ -18,6 +19,7 @@ namespace TerrariaTogether.Core.Modules
 		public override void Load()
 		{
 			modules.Add(new GatingModule());
+			modules.Add(new StatsModule());
 		}
 
 		public override void Unload()
