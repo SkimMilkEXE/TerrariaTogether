@@ -143,9 +143,9 @@ Stats: {
 
 	Commands: {
 		Usage: Usage: /smp stats [player | top <playtime | deaths | bosses | pvp>]
-		Header: "Stats for {0}:"
+		Header: Stats for {0}:
 		Line: "  Playtime {0}, deaths {1}, bosses killed {2}, PvP kills {3}"
-		TopHeader: "Top {0}:"
+		TopHeader: Top {0}:
 		TopLine: "  {0}. {1}: {2}"
 		TopEmpty: "  Nobody has any yet."
 		NotFound: No stats for a player named "{0}".
