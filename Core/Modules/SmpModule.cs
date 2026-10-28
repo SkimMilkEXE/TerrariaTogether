@@ -10,8 +10,8 @@ namespace TerrariaTogether.Core.Modules
 		// short lowercase id used in configs, packets, commands and the api
 		public abstract string Id { get; }
 
-		// each module reads its own toggle from CoreServerConfig
-		public abstract bool Enabled { get; }
+		// on/off comes from the Modules table in CoreServerConfig
+		public bool Enabled => ModuleManager.IsEnabled(Id);
 
 		// handles /smp <id> <args...>, args has the module id already stripped
 		public virtual void HandleCommand(CommandCaller caller, string[] args)

@@ -2,8 +2,18 @@
 # Please read https://github.com/tModLoader/tModLoader/wiki/Localization to learn more about localization and these files.
 
 Configs: {
+	Toggle: {
+		On: On
+		Off: Off
+	}
+
 	CoreServerConfig: {
 		DisplayName: Server Settings
+
+		Modules: {
+			Label: Modules
+			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating).
+		}
 
 		Admins: {
 			Label: Admins
@@ -33,6 +43,108 @@ Configs: {
 		}
 
 		Tooltip: ""
+	}
+
+	GatingConfig: {
+		DisplayName: Gating
+
+		ThresholdPercent: {
+			Label: Threshold (%)
+			Tooltip: Percent of members that must be online to fight a boss.
+		}
+
+		MinOnline: {
+			Label: Minimum online
+			Tooltip: Bosses stay locked with fewer than this many members online, whatever the percent says.
+		}
+
+		FirstKillOnly: {
+			Label: First kill only
+			Tooltip: Once a boss has been beaten it stays unlocked, so it can be farmed with any number of players.
+		}
+
+		Announce: {
+			Label: Announce changes
+			Tooltip: Server chat message when bosses lock or unlock, and when an admin locks or unlocks a boss.
+		}
+
+		Headers: {
+			Bosses: Bosses
+			Debug: Debug
+		}
+
+		GatedBosses: {
+			Label: Gated bosses
+			Tooltip: Untick a boss to never lock it. /smp gating lock and unlock still win over this.
+		}
+
+		SimulatedOnline: {
+			Label: Simulated online
+			Tooltip: Pretend this many members are online, for testing thresholds solo. -1 turns it off.
+		}
+
+		SimulatedMembers: {
+			Label: Simulated members
+			Tooltip: Pretend the member total is this, for testing thresholds solo. -1 turns it off.
+		}
+	}
+}
+
+ModuleNames.gating: Gating
+
+Gating: {
+	Locked: "{0} is locked: {1}/{2} online (need {3})."
+	LockedByAdmin: "{0} is locked by an admin."
+
+	Tooltip: {
+		Locked: Locked: {0}/{1} online (need {2})
+		LockedByAdmin: Locked by an admin
+		Unlocked: Unlocked
+	}
+
+	Announce: {
+		ThresholdUnlocked: Bosses are now unlocked: {0}/{1} members online (need {2}).
+		ThresholdRelocked: Bosses are locked again: {0}/{1} members online (need {2}).
+
+		Override: {
+			Unlocked: "{0} was unlocked by an admin."
+			Locked: "{0} was locked by an admin."
+			None: "{0} is back to normal rules."
+		}
+	}
+
+	Commands: {
+		Usage: Usage: /smp gating [status | lock <boss> | unlock <boss> | clear <boss>]
+		StatusHeader: "{0}/{1} members online, {2} needed. First kill only: {3}."
+		StatusLocked: "  {0}: locked"
+		StatusUnlocked: "  {0}: unlocked"
+		StatusDowned: "  {0}: unlocked (already beaten)"
+		StatusNotGated: "  {0}: unlocked (not gated in config)"
+		StatusForcedUnlock: "  {0}: unlocked by an admin"
+		StatusForcedLock: "  {0}: locked by an admin"
+		BossNotFound: No boss called "{0}". Use /smp gating status to see the names.
+		BossAmbiguous: More than one boss matches "{0}". Use the full key, like Terraria/EyeOfCthulhu.
+	}
+
+	Bosses: {
+		KingSlime: King Slime
+		EyeOfCthulhu: Eye of Cthulhu
+		EaterOfWorlds: Eater of Worlds
+		BrainOfCthulhu: Brain of Cthulhu
+		QueenBee: Queen Bee
+		Skeletron: Skeletron
+		Deerclops: Deerclops
+		WallOfFlesh: Wall of Flesh
+		QueenSlime: Queen Slime
+		TheTwins: The Twins
+		TheDestroyer: The Destroyer
+		SkeletronPrime: Skeletron Prime
+		Plantera: Plantera
+		Golem: Golem
+		DukeFishron: Duke Fishron
+		EmpressOfLight: Empress of Light
+		LunaticCultist: Lunatic Cultist
+		MoonLord: Moon Lord
 	}
 }
 

@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader.Config;
-using TerrariaTogether.Core.Permissions;
 using TerrariaTogether.Core.Roster;
 
 namespace TerrariaTogether.Core.Config
 {
-	public class CoreServerConfig : ModConfig
+	public class CoreServerConfig : SmpServerConfig
 	{
-		public override ConfigScope Mode => ConfigScope.ServerSide;
+		// module id -> on/off, only modules switched at least once are stored, missing ids count as on
+		[CustomModConfigItem(typeof(ModuleToggleTableElement))]
+		public Dictionary<string, bool> Modules = new();
 
-		// module on/off toggles go here as each module is added
-
-		// player names or client uuids, players can see theirs with /smp whoami
+		// player names or player ids, players can see theirs with /smp whoami
 		public List<string> Admins = new();
 
 		[DefaultValue(RosterMode.Auto)]
@@ -24,15 +21,5 @@ namespace TerrariaTogether.Core.Config
 		[Range(0, 365)]
 		[DefaultValue(14)]
 		public int InactiveDays = 14;
-
-		// only admins can change server settings from in game
-		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message)
-		{
-			if (SmpPermissions.IsAdmin(Main.player[whoAmI]))
-				return true;
-
-			message = NetworkText.FromKey("Mods.TerrariaTogether.Commands.NotAdmin");
-			return false;
-		}
 	}
 }

@@ -71,6 +71,10 @@ namespace TerrariaTogether.Core.Roster
 
 		public bool IsOnline(string uuid)
 		{
+			// no server in single player, so the only one online is the local player
+			if (Main.netMode == NetmodeID.SinglePlayer)
+				return uuid == Main.clientUUID;
+
 			for (int i = 0; i < slotUuids.Length; i++)
 			{
 				if (slotUuids[i] == uuid && Netplay.Clients[i].IsActive)

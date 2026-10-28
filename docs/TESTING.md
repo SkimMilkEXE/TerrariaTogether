@@ -41,3 +41,31 @@ Note: two clients on the same PC may send the same ID and count as one member. C
 | Manual mode: new player joins | Not added; `/smp roster add <name>` adds them |
 | `/smp roster exclude <name>` | Member no longer counted; again to undo |
 | Non-admin: `/smp roster add <name>` | Refused |
+
+### Gating
+
+Solo setup: one member online, defaults (75%, min 2), so everything is locked. Set **Minimum online** to 1 to unlock.
+
+| Test | Expected |
+|------|----------|
+| Locked: use Suspicious Looking Eye at night | Not used up, chat says "Eye of Cthulhu is locked: 1/1 online (need 2)." (once, not spammed) |
+| Unlocked (min online 1): use Suspicious Looking Eye at night | Eye of Cthulhu spawns normally |
+| Locked: change min online back to 2 in game, try again | Locked again without rejoining |
+| Locked: `/smp roster exclude` yourself, then unlock settings | Still locked (0 online) |
+| Locked: talk to the Clothier at night ("Curse") | Skeletron spawns, is sent away at once, server chat explains why |
+| Locked: Mechanical Eye | Not used up, "The Twins is locked..." |
+| Turn Gating off in **Modules** (Server Settings) | Everything summons normally, `/smp modules` shows gating: off |
+| Single player | Nothing is ever locked |
+| Hover Suspicious Looking Eye (locked / unlocked) | Tooltip line "Locked: 1/1 online (need 2)" in red / "Unlocked" in green |
+| Set **Minimum online** to 1 | Server chat: "Bosses are now unlocked: 1/1 members online (need 1)." Back to 2: "locked again" |
+| `/smp gating status` | Header with counts, one line per boss with locked/unlocked and the reason |
+| Beat Eye of Cthulhu, then lock settings again | EoC stays unlocked ("already beaten"); turn **First kill only** off and it locks |
+| `/smp gating unlock eye of cthulhu` while locked | Announced; EoC can be summoned; status says "unlocked by an admin" |
+| `/smp gating lock king slime` while unlocked | Announced; Slime Crown blocked with "King Slime is locked by an admin." |
+| Restart server, `/smp gating status` | Overrides are still there |
+| `/smp gating clear king slime` | Back to normal rules |
+| Non-admin: `/smp gating lock king slime` | Refused |
+| **Simulated online** 3, **Simulated members** 4 | Status shows 3/4 online, need 3 |
+| **Gated bosses**: turn King Slime off while locked | Slime Crown works; status says "not gated in config" |
+| ...then `/smp gating lock king slime` | Locked again (commands beat the table) |
+| Open **Server Settings** / **Gating** | **Modules** shows Gating, **Gated bosses** shows all 18 bosses by name, each with a toggle, no text boxes or +/- buttons. Save button lights up after a toggle; **Restore defaults** turns everything back on |

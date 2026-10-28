@@ -8,10 +8,10 @@ namespace TerrariaTogether.Core.Networking
 	public static class SmpPackets
 	{
 		// starts a packet for a module, the caller writes the body and calls Send
-		public static ModPacket Create(SmpModule module, byte msgType)
+		public static ModPacket Create(string moduleId, byte msgType)
 		{
 			ModPacket packet = ModContent.GetInstance<TerrariaTogether>().GetPacket();
-			packet.Write(module.Id);
+			packet.Write(moduleId);
 			packet.Write(msgType);
 			return packet;
 		}

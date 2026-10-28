@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
+using TerrariaTogether.Core.Config;
+using TerrariaTogether.Modules.Gating;
 
 namespace TerrariaTogether.Core.Modules
 {
@@ -15,12 +17,18 @@ namespace TerrariaTogether.Core.Modules
 
 		public override void Load()
 		{
-			// register modules here, e.g. modules.Add(new GatingModule());
+			modules.Add(new GatingModule());
 		}
 
 		public override void Unload()
 		{
 			modules.Clear();
+		}
+
+		// modules missing from the table count as on
+		public static bool IsEnabled(string id)
+		{
+			return ModContent.GetInstance<CoreServerConfig>().Modules.GetValueOrDefault(id, true);
 		}
 
 		public SmpModule Get(string id)
