@@ -124,6 +124,11 @@ Set up a webhook in a test channel first (see `CONFIG.md`).
 | Turn each **Post ...** option off | That kind of message stops |
 | Turn Discord log off in **Modules** | Nothing posted |
 | Unplug the internet / wrong URL | Warnings in `server.log`, game keeps running |
+| Admin: `/smp discord url clear`, then `/smp discord` | "No Discord webhook is set", file deleted, nothing posted |
+| Admin: `/smp discord url <webhook url>` | "Discord webhook saved", next join/chat is posted without a restart, file written |
+| Admin: `/smp discord url hello` | "That isn't a Discord webhook URL", old webhook unchanged |
+| Non-admin: `/smp discord` | Refused |
+| Console: `smp discord url <webhook url>` | Works the same |
 
 ### Welcome and rules
 

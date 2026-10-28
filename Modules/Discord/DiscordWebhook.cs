@@ -41,14 +41,41 @@ namespace TerrariaTogether.Modules.Discord
 			}
 
 			string text = File.ReadAllText(FilePath).Trim();
-			if (!Uri.TryCreate(text, UriKind.Absolute, out Uri uri) || uri.Scheme != Uri.UriSchemeHttps
-				|| !(uri.Host == "discord.com" || uri.Host == "discordapp.com") || !uri.AbsolutePath.StartsWith("/api/webhooks/"))
+			if (!IsWebhookUrl(text))
 			{
 				logger.Warn($"discord: {FileName} doesn't contain a discord webhook url, nothing will be posted");
 				return;
 			}
 			url = text;
 			logger.Info("discord: webhook loaded");
+		}
+
+		// saves the url to the file and starts using it, false if it isn't a webhook url
+		public bool SetUrl(string text)
+		{
+			text = text.Trim();
+			if (!IsWebhookUrl(text))
+				return false;
+
+			Directory.CreateDirectory(Path.GetDirectoryName(FilePath));
+			File.WriteAllText(FilePath, text);
+			url = text;
+			logger.Info("discord: webhook set by command");
+			return true;
+		}
+
+		public void ClearUrl()
+		{
+			if (File.Exists(FilePath))
+				File.Delete(FilePath);
+			url = null;
+			logger.Info("discord: webhook cleared by command");
+		}
+
+		private static bool IsWebhookUrl(string text)
+		{
+			return Uri.TryCreate(text, UriKind.Absolute, out Uri uri) && uri.Scheme == Uri.UriSchemeHttps
+				&& (uri.Host == "discord.com" || uri.Host == "discordapp.com") && uri.AbsolutePath.StartsWith("/api/webhooks/");
 		}
 
 		// one embed per post, so each message gets its own colored box with discord showing the date and time

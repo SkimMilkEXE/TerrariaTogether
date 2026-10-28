@@ -91,12 +91,15 @@ Posts server activity to a Discord channel, so people can follow along without b
 
 **Setup (one time):**
 1. In Discord: channel settings → **Integrations** → **Webhooks** → **New Webhook** → **Copy Webhook URL**.
-2. On the server machine, create
-   `Documents/My Games/Terraria/tModLoader/ModConfigs/TerrariaTogether_DiscordWebhook.txt`
-   and paste the URL into it (nothing else).
-3. Restart the server. `server.log` says "discord: webhook loaded".
+2. As an admin in game (or in the server console without the `/`), type `/smp discord url <paste the url>`. Posts start straight away.
 
-The URL is a password for the channel: anyone with it can post there. That's why it lives in its own file on the server and not in the settings, which get sent to every player. Don't share the file or paste the URL in chat. If it leaks, delete the webhook in Discord and make a new one.
+Or, instead of step 2, create
+`Documents/My Games/Terraria/tModLoader/ModConfigs/TerrariaTogether_DiscordWebhook.txt` on the server machine,
+paste the URL into it (nothing else) and restart the server. The command writes this same file.
+
+The URL is a password for the channel: anyone with it can post there. That's why it lives in its own file on the server and not in the settings, which get sent to every player. The command is only seen by the server (and stays in your own chat history until you leave). Never paste the URL into normal chat. If it leaks, delete the webhook in Discord and make a new one.
+
+**Don't share `server.log` without editing it first.** tModLoader writes every web request any mod makes into the log, so each Discord post leaves a `Web Request: https://discord.com/api/webhooks/...` line with the full URL. Delete those lines before posting the log anywhere, e.g. when asking for help.
 
 File: `ModConfigs/TerrariaTogether_DiscordConfig.json` (admins can change it in game).
 
@@ -140,6 +143,9 @@ Commands run on the server in multiplayer and also work in the server console (w
 | `/smp gating clear <boss>` | admins | Puts a boss back on the normal rules |
 | `/smp rules` | everyone | Shows the server rules |
 | `/smp rules accept` | everyone | Accepts the rules, so you can build when **Must accept rules to build** is on |
+| `/smp discord` or `/smp discord status` | admins | Says whether a Discord webhook is set (never shows the URL) |
+| `/smp discord url <webhook url>` | admins | Saves the webhook and starts posting |
+| `/smp discord url clear` | admins | Removes the webhook, nothing is posted |
 | `/smp stats [player]` | everyone | Shows your stats, or another player's |
 | `/smp stats top [playtime\|deaths\|bosses\|pvp]` | everyone | Top 5 players for that stat (playtime if left out) |
 | `/smp <module> ...` | depends | Runs a module's commands. Turned-off modules refuse their commands. |

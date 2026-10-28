@@ -35,6 +35,8 @@ namespace TerrariaTogether.Modules.Discord
 
 		public static DiscordSystem Instance => ModContent.GetInstance<DiscordSystem>();
 
+		public DiscordWebhook Webhook => webhook;
+
 		private static DiscordConfig Config => ModContent.GetInstance<DiscordConfig>();
 
 		private static bool Active => Main.netMode == NetmodeID.Server && DiscordModule.IsEnabled;

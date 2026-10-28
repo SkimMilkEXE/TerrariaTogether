@@ -18,6 +18,10 @@ namespace TerrariaTogether.Core.Commands
 		public override string Usage => "/smp help";
 		public override string Description => Language.GetTextValue(Key + "Description");
 
+		// tmodloader lowercases arguments otherwise, which breaks case-sensitive ones like webhook urls
+		// subcommands are matched ignoring case instead
+		public override bool IsCaseSensitive => true;
+
 		public override void Action(CommandCaller caller, string input, string[] args)
 		{
 			string sub = args.Length > 0 ? args[0].ToLowerInvariant() : "help";
