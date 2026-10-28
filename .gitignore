@@ -14,6 +14,9 @@ obj/
 Thumbs.db
 .DS_Store
 
+# secrets, the webhook file normally lives outside the repo, this is a safety net
+*DiscordWebhook.txt
+
 # claude
 CLAUDE.md
 .claude/

@@ -12,7 +12,7 @@ Configs: {
 
 		Modules: {
 			Label: Modules
-			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats). Welcome and rules greets players and shows the server rules (settings are under Welcome and rules).
+			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats). Welcome and rules greets players and shows the server rules (settings are under Welcome and rules). Discord log posts server activity to a Discord channel (settings are under Discord log).
 		}
 
 		Admins: {
@@ -71,6 +71,30 @@ Configs: {
 		}
 
 		Tooltip: ""
+	}
+
+	DiscordConfig: {
+		DisplayName: Discord log
+
+		PostJoinLeave: {
+			Label: Post joins and leaves
+			Tooltip: ""
+		}
+
+		PostChat: {
+			Label: Post chat
+			Tooltip: Public chat only. Party chat and commands are never posted.
+		}
+
+		PostDeaths: {
+			Label: Post deaths
+			Tooltip: ""
+		}
+
+		PostFirstBossKills: {
+			Label: Post first boss kills
+			Tooltip: Posts the first time this world beats each boss, with everyone who helped.
+		}
 	}
 
 	RulesConfig: {
@@ -166,6 +190,15 @@ ModuleNames: {
 	gating: Gating
 	stats: Stats
 	rules: Welcome and rules
+	discord: Discord log
+}
+
+Discord: {
+	Joined: **{0}** joined the server
+	Left: **{0}** left the server
+	Chat: **{0}**: {1}
+	Death: "{0}"
+	FirstKill: **{0}** defeated for the first time by {1}!
 }
 
 Rules: {

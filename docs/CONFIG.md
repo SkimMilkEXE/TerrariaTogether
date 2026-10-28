@@ -85,6 +85,31 @@ File: `ModConfigs/TerrariaTogether_RulesConfig.json` (admins can change it in ga
 
 Who has seen and accepted which version of the rules is saved with the world.
 
+## Discord log
+
+Posts server activity to a Discord channel, so people can follow along without being in game.
+
+**Setup (one time):**
+1. In Discord: channel settings → **Integrations** → **Webhooks** → **New Webhook** → **Copy Webhook URL**.
+2. On the server machine, create
+   `Documents/My Games/Terraria/tModLoader/ModConfigs/TerrariaTogether_DiscordWebhook.txt`
+   and paste the URL into it (nothing else).
+3. Restart the server. `server.log` says "discord: webhook loaded".
+
+The URL is a password for the channel: anyone with it can post there. That's why it lives in its own file on the server and not in the settings, which get sent to every player. Don't share the file or paste the URL in chat. If it leaks, delete the webhook in Discord and make a new one.
+
+File: `ModConfigs/TerrariaTogether_DiscordConfig.json` (admins can change it in game).
+
+| Option | Default | What it does |
+|--------|---------|--------------|
+| **Post joins and leaves** | on | "**Steve** joined the server" / "left the server" |
+| **Post chat** | on | Public chat only. Party chat and commands are never posted. |
+| **Post deaths** | on | The death message, e.g. "Steve was slain by Zombie." |
+| **Post first boss kills** | on | "**Eye of Cthulhu** defeated for the first time by Steve, Alex!" Only the first kill of each boss in this world, with everyone who hit it. |
+
+Nothing is posted in single player. Mentions are switched off, so `@everyone` typed in game doesn't ping anyone.
+Bosses beaten before this module was turned on are announced once more on their next kill.
+
 ## Stats
 
 Tracks each player's playtime, deaths, boss kills and PvP kills in this world. No settings, turn it on or off under **Modules**.

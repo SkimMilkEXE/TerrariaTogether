@@ -13,6 +13,10 @@ namespace TerrariaTogether.Core.Roster
 
 		public static PresenceTracker Instance => ModContent.GetInstance<PresenceTracker>();
 
+		// server only, for modules that react to players joining and leaving
+		public event Action<Player> PlayerJoined;
+		public event Action<Player> PlayerLeft;
+
 		// first 8 characters of a uuid, short enough to type into the admins list
 		public const int ShortIdLength = 8;
 
@@ -48,6 +52,7 @@ namespace TerrariaTogether.Core.Roster
 			uuid = guid.ToString();
 			slotUuids[playerNumber] = uuid;
 			RosterSystem.Instance.OnJoin(uuid, Main.player[playerNumber].name);
+			PlayerJoined?.Invoke(Main.player[playerNumber]);
 			return false;
 		}
 
@@ -58,6 +63,7 @@ namespace TerrariaTogether.Core.Roster
 				return;
 
 			RosterSystem.Instance.OnLeave(uuid, player.name);
+			PlayerLeft?.Invoke(player);
 			slotUuids[player.whoAmI] = null;
 		}
 

@@ -27,6 +27,9 @@ and a top 5 with `/smp stats top <stat>`.
 A configurable welcome message on every join, server rules on first join and whenever they change,
 and an optional accept-rules step (`/smp rules accept`) before players can build.
 
+### Discord log (`discord`)
+Posts joins, leaves, public chat, deaths and each boss's first kill to a Discord channel through a webhook.
+
 ## Small
 
 ### AFK detection (Core) — Idea
@@ -72,10 +75,3 @@ Best built after the grief log.
 ### Progression extensions (`progression`) — Idea
 Lock more than bosses: Hardmode entry, biome keys, specific events.
 Wall of Flesh gating already covers most of Hardmode, so this waits until there's a need.
-
-## Suggested order
-
-1. Release Gating (v0.1)
-2. AFK detection
-3. Grief log or chest locking, depending on which problem the group hits first
-4. Land claims

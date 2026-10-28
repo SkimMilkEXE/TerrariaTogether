@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using TerrariaTogether.Core.Config;
+using TerrariaTogether.Modules.Discord;
 using TerrariaTogether.Modules.Gating;
 using TerrariaTogether.Modules.Rules;
 using TerrariaTogether.Modules.Stats;
@@ -22,6 +23,7 @@ namespace TerrariaTogether.Core.Modules
 			modules.Add(new GatingModule());
 			modules.Add(new StatsModule());
 			modules.Add(new RulesModule());
+			modules.Add(new DiscordModule());
 		}
 
 		public override void Unload()

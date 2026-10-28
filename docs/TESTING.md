@@ -104,6 +104,27 @@ Bosses locked unless a row says otherwise. Hardmode rows need a hardmode test wo
 | Same, but lower **Minimum online** again before time runs out | "Enough members are online again, ... stays." |
 | **Mid-fight** = Continue | Raising **Minimum online** mid-fight changes nothing |
 
+### Discord log
+
+Set up a webhook in a test channel first (see `CONFIG.md`).
+
+| Test | Expected |
+|------|----------|
+| Start server without the webhook file | `server.log`: "no webhook file at ...", game works normally |
+| File with junk in it | `server.log`: "doesn't contain a discord webhook url" |
+| Valid file, restart | `server.log`: "webhook loaded" |
+| Join, then leave | "**you** joined the server" / "left the server" in Discord |
+| Say something in chat | "**you**: message" |
+| Party chat, `/smp help` | Nothing posted |
+| Type `@everyone hi` and `**bold**` | Posted as plain text, nobody pinged, no bold |
+| Die | Death message posted |
+| Kill Eye of Cthulhu (unlocked) | "**Eye of Cthulhu** defeated for the first time by you!" |
+| Kill it again | Nothing posted |
+| The Twins | One post, "Retinazer & Spazmatism" |
+| Turn each **Post ...** option off | That kind of message stops |
+| Turn Discord log off in **Modules** | Nothing posted |
+| Unplug the internet / wrong URL | Warnings in `server.log`, game keeps running |
+
 ### Welcome and rules
 
 | Test | Expected |
