@@ -30,6 +30,8 @@ namespace TerrariaTogether.Core.Commands
 			{
 				case "help":
 					caller.Reply(Language.GetTextValue(Key + "Help"));
+					if (SmpPermissions.IsAdmin(caller))
+						caller.Reply(Language.GetTextValue(Key + "HelpAdmin"), Color.Gold);
 					return;
 				case "modules":
 					ListModules(caller);

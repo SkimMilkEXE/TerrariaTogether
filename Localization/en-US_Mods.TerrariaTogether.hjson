@@ -324,8 +324,18 @@ Commands: {
 		/smp modules - list modules and whether they're on
 		/smp whoami - show your name, ID and admin status
 		/smp roster - list members and who's online
-		/smp roster add|remove|exclude <name> - manage members (admins)
-		/smp <module> ... - run a module's commands
+		/smp gating - show which bosses are locked
+		/smp rules - show the server rules, /smp rules accept to agree to them
+		/smp stats [player] - playtime, deaths and kills
+		/smp stats top [playtime|deaths|bosses|pvp] - top 5 players
+		'''
+	HelpAdmin:
+		'''
+		Admin commands:
+		/smp roster add|remove|exclude <name> - manage members
+		/smp gating lock|unlock|clear <boss> - override a boss's lock
+		/smp discord - check whether a Discord webhook is set
+		/smp discord url <url>|clear - set or remove the Discord webhook
 		'''
 	Unknown: Unknown command "{0}". Use /smp help.
 	NotAdmin: Only server admins can do that.
