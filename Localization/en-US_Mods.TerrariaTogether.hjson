@@ -12,7 +12,7 @@ Configs: {
 
 		Modules: {
 			Label: Modules
-			Tooltip: Turn each module on or off. Gating keeps bosses locked until enough members are online (settings are under Gating). Stats tracks playtime, deaths and kills (/smp stats). Welcome and rules greets players and shows the server rules (settings are under Welcome and rules). Discord log posts server activity to a Discord channel (settings are under Discord log).
+			Tooltip: Turn each module on or off. Hover a module to see what it does.
 		}
 
 		Admins: {
@@ -191,6 +191,13 @@ ModuleNames: {
 	stats: Stats
 	rules: Welcome and rules
 	discord: Discord log
+}
+
+ModuleDescriptions: {
+	gating: Keeps bosses and events locked until enough members are online. Settings are on the Gating page.
+	stats: Tracks playtime, deaths, boss kills and PvP kills for each player. See them with /smp stats.
+	rules: Greets players when they join and shows the server rules. Settings are on the Welcome and rules page.
+	discord: Posts joins, leaves, chat, deaths and first boss kills to a Discord channel. Set it up with /smp discord url.
 }
 
 Discord: {

@@ -21,6 +21,9 @@ namespace TerrariaTogether.Core.Config
 		// a row with a null key is drawn as a group heading instead of a toggle
 		protected abstract IEnumerable<(string Key, string Label)> Rows();
 
+		// hover text for a row, null for none
+		protected virtual string RowTooltip(string key) => null;
+
 		public override void OnBind()
 		{
 			base.OnBind();
@@ -47,7 +50,7 @@ namespace TerrariaTogether.Core.Config
 					top += 30;
 					continue;
 				}
-				ConfigManager.WrapIt(this, ref top, wrapper, new ToggleRow(table, key, label), order++);
+				ConfigManager.WrapIt(this, ref top, wrapper, new ToggleRow(table, key, label, RowTooltip(key)), order++);
 			}
 
 			// ui elements are capped at screen height by default, long lists (calamity + vanilla) go past that
@@ -63,12 +66,14 @@ namespace TerrariaTogether.Core.Config
 		private readonly string key;
 
 		public string Label { get; }
+		public string Tooltip { get; }
 
-		public ToggleRow(Dictionary<string, bool> table, string key, string label)
+		public ToggleRow(Dictionary<string, bool> table, string key, string label, string tooltip)
 		{
 			this.table = table;
 			this.key = key;
 			Label = label;
+			Tooltip = tooltip;
 		}
 
 		[CustomModConfigItem(typeof(ToggleRowElement))]
@@ -89,6 +94,7 @@ namespace TerrariaTogether.Core.Config
 			base.OnBind();
 			toggleTexture = Main.Assets.Request<Texture2D>("Images/UI/Settings_Toggle");
 			TextDisplayFunction = () => ((ToggleRow)Item).Label;
+			TooltipFunction = () => ((ToggleRow)Item).Tooltip;
 			OnLeftClick += (_, _) => Value = !Value;
 		}
 
@@ -118,5 +124,7 @@ namespace TerrariaTogether.Core.Config
 		{
 			return ModuleManager.Instance.Modules.Select(m => (m.Id, Language.GetTextValue("Mods.TerrariaTogether.ModuleNames." + m.Id)));
 		}
+
+		protected override string RowTooltip(string key) => Language.GetTextValue("Mods.TerrariaTogether.ModuleDescriptions." + key);
 	}
 }
