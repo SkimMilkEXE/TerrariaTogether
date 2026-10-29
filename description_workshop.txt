@@ -13,7 +13,7 @@ Built as a small core plus modules. Server admins switch each one on or off in [
 [h2]Getting started[/h2]
 [list]
 [*]Install the mod on the server and on every player's game.
-[*]Add yourself as an admin: open [b]Server Settings[/b] in a single-player world, add your character name to [b]Admins[/b], save, then restart the server.
+[*]Create a world and join it first: the first player to join a world is added to [b]Admins[/b] automatically.
 [*]Type [i]/smp help[/i] in game to see the commands.
 [/list]
 
@@ -21,4 +21,11 @@ Built as a small core plus modules. Server admins switch each one on or off in [
 [list]
 [*]The server makes every decision. Gating and the rules don't apply in single-player.
 [*]Other mods can register bosses through [i]Mod.Call[/i].
+[*]Source code, full settings reference and changelog: [url=https://github.com/SkimMilkEXE/TerrariaTogether]GitHub[/url]
+[/list]
+
+[h2]Discord log setup[/h2]
+[list]
+[*]In Discord: channel settings > Integrations > Webhooks > New Webhook > Copy Webhook URL.
+[*]As an admin in game, type [i]/smp discord url <the url>[/i]. Never paste the URL in normal chat.
 [/list]

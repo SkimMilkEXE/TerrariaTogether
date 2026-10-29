@@ -39,7 +39,7 @@ namespace TerrariaTogether.Modules.Rules
 		private static RulesConfig Config => ModContent.GetInstance<RulesConfig>();
 
 		// client only: building is blocked until the rules are accepted
-		public bool LocalBlocked => RulesModule.IsEnabled && Config.MustAccept() && !localAccepted;
+		public bool LocalBlocked => !localAccepted && RulesModule.IsEnabled && Config.MustAccept();
 
 		// server: whether this player may build
 		public bool HasAccepted(Player player)

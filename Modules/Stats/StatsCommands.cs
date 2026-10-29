@@ -52,10 +52,10 @@ namespace TerrariaTogether.Modules.Stats
 		{
 			Func<PlayerStats, long> value = board switch
 			{
-				"playtime: " => s => s.PlaytimeSeconds,
-				"deaths: " => s => s.Deaths,
-				"bosses: " => s => s.BossKills,
-				"pvp: " => s => s.PvpKills,
+				"playtime" => s => s.PlaytimeSeconds,
+				"deaths" => s => s.Deaths,
+				"bosses" => s => s.BossKills,
+				"pvp" => s => s.PvpKills,
 				_ => null,
 			};
 			if (value == null)

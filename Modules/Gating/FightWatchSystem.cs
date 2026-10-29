@@ -77,8 +77,11 @@ namespace TerrariaTogether.Modules.Gating
 			}
 
 			// forget bosses whose fight ended
-			foreach (BossEntry boss in leaving.Keys.Where(b => !fighting.Contains(b)).ToList())
-				leaving.Remove(boss);
+			if (leaving.Count > 0)
+			{
+				foreach (BossEntry boss in leaving.Keys.Where(b => !fighting.Contains(b)).ToList())
+					leaving.Remove(boss);
+			}
 
 			GatingConfig config = ModContent.GetInstance<GatingConfig>();
 			if (config.MidFight != MidFightPolicy.DespawnAfterWarning)

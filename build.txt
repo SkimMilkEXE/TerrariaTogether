@@ -1,3 +1,5 @@
 displayName = Terraria Together
 author = SkimMilkEXE
-version = 0.1
+version = 1.0.0
+homepage = https://github.com/SkimMilkEXE/TerrariaTogether
+buildIgnore = *.md, LICENSE, docs/*, .git/*, .gitignore, .claude/*

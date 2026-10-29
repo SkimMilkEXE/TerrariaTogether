@@ -15,7 +15,7 @@ To test with two players, start a second client with `start-tModLoader-FamilySha
 
 Logs: `tModLoader-Logs/` in the tModLoader install folder (`server.log` and `client.log`). `Documents/My Games/Terraria/tModLoader/Logs` is a shortcut to it.
 
-## Phase 0 check
+## Setup check
 
 - [ ] Server starts with the mod enabled, no errors in `server.log`
 - [ ] A client joins and can play
@@ -23,7 +23,7 @@ Logs: `tModLoader-Logs/` in the tModLoader install folder (`server.log` and `cli
 
 ## Test matrix
 
-Filled in as features land. Each row is run on a dedicated server with one admin and one non-admin client.
+Each row is run on a dedicated server with one admin and one non-admin client.
 
 Note: two clients on the same PC may send the same ID and count as one member. Check `/smp whoami` on both.
 
@@ -74,7 +74,7 @@ Solo setup: one member online, defaults (75%, min 2), so everything is locked. S
 | ...then `/smp gating lock king slime` | Locked again (commands beat the table) |
 | Open **Server Settings** / **Gating** | **Modules** shows Gating, **Gated bosses** shows all 18 bosses by name, each with a toggle, no text boxes or +/- buttons. Save button lights up after a toggle; **Restore defaults** turns everything back on |
 
-### Other mods (Phase 5)
+### Gating with other mods
 
 Enable Calamity and Boss Checklist alongside Terraria Together, on both server and client.
 
@@ -89,7 +89,7 @@ Enable Calamity and Boss Checklist alongside Terraria Together, on both server a
 | Without Boss Checklist enabled | Log has no import line; Calamity bosses still blocked at spawn via **Unknown bosses** (status doesn't list them) |
 | **Unknown bosses** = Ignore, without Boss Checklist | Calamity bosses spawn freely |
 
-### Edge cases (Phase 6)
+### Gating edge cases
 
 Bosses locked unless a row says otherwise. Hardmode rows need a hardmode test world.
 
