@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/hero.png" alt="Server chat showing a locked boss message and the /smp help list">
+  <img src="docs/hero.png" alt="In-game chat showing the welcome message and Eye of Cthulhu is locked: 1/1 online (need 2)">
 </p>
 
 ## Features
@@ -23,8 +23,8 @@
 - **Modular**: every feature is a module that can be switched off without affecting the others.
 
 <p align="center">
-  <img src="docs/config-gating.png" alt="Gating settings with the per-boss checkbox list grouped by mod" width="45%">
-  <img src="docs/discord-log.png" alt="Discord channel showing join, chat, death and boss kill posts" width="45%">
+  <img src="docs/config-gating.png" alt="Gating settings with threshold, minimum online and mid-fight options above an on/off switch for each boss" width="45%">
+  <img src="docs/discord-log.png" alt="Discord channel showing chat, leave, join and death posts, each in its own colored box with the time" width="45%">
 </p>
 
 ## Install
@@ -41,6 +41,10 @@ Settings are stored on the server in `Documents/My Games/Terraria/tModLoader/Mod
 1. Create a world and join it first. The first player to join a world is added to **Admins** automatically.
 2. Open **Settings** → **Mod Configuration** → **Terraria Together** to set the gating threshold, rules and which modules are on.
 3. Type `/smp help` in chat to see the commands. Admins see an extra list of admin commands.
+
+<p align="center">
+  <img src="docs/commands.png" alt="/smp help output with the player commands in white and the admin commands in gold">
+</p>
 
 Every option and command is described in [docs/CONFIG.md](docs/CONFIG.md).
 
